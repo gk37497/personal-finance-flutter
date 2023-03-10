@@ -28,14 +28,10 @@ class ScaffoldSnackbar {
   }
 }
 
-enum AuthMode { login, register, phone }
+enum AuthMode { login, register }
 
 extension on AuthMode {
-  String get label => this == AuthMode.login
-      ? 'Sign in'
-      : this == AuthMode.phone
-      ? 'Sign in'
-      : 'Register';
+  String get label => this == AuthMode.login ? 'Login' : 'Register';
 }
 
 class AuthGate extends StatefulWidget {
@@ -48,7 +44,6 @@ class AuthGate extends StatefulWidget {
 class _AuthGateState extends State<AuthGate> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   String error = '';
@@ -80,120 +75,120 @@ class _AuthGateState extends State<AuthGate> {
           child: SingleChildScrollView(
             child: Center(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: SafeArea(
-                  child: Form(
-                    key: formKey,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 400),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Visibility(
-                            visible: error.isNotEmpty,
-                            child: MaterialBanner(
-                              backgroundColor:
-                              Theme.of(context).colorScheme.error,
-                              content: SelectableText(error),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      error = '';
-                                    });
-                                  },
-                                  child: const Text(
-                                    'dismiss',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                )
-                              ],
-                              contentTextStyle:
-                              const TextStyle(color: Colors.white),
-                              padding: const EdgeInsets.all(10),
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          Column(
+                padding: const EdgeInsets.symmetric(horizontal: 40),
+                child: Column(
+                  children: [
+                    Text(
+                      mode.label,
+                      style: const TextStyle(
+                          fontSize: 30, fontWeight: FontWeight.w600),
+                    ),
+                    SafeArea(
+                      child: Form(
+                        key: formKey,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 400),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              TextFormField(
-                                controller: emailController,
-                                decoration: const InputDecoration(
-                                  hintText: 'Email',
-                                  border: OutlineInputBorder(),
-                                ),
-                                validator: (value) =>
-                                value != null && value.isNotEmpty
-                                    ? null
-                                    : 'Required',
-                              ),
-                              const SizedBox(height: 20),
-                              TextFormField(
-                                controller: passwordController,
-                                obscureText: true,
-                                decoration: const InputDecoration(
-                                  hintText: 'Password',
-                                  border: OutlineInputBorder(),
-                                ),
-                                validator: (value) =>
-                                value != null && value.isNotEmpty
-                                    ? null
-                                    : 'Required',
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 20),
-                          SizedBox(
-                            width: double.infinity,
-                            height: 50,
-                            child: ElevatedButton(
-                              onPressed: isLoading
-                                  ? null
-                                  : () => _handleMultiFactorException(
-                                _emailAndPassword,
-                              ),
-                              child: isLoading
-                                  ? const CircularProgressIndicator.adaptive()
-                                  : Text(mode.label),
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: _resetPassword,
-                            child: const Text('Forgot password?'),
-                          ),
-                          const SizedBox(height: 20),
-                          if (mode != AuthMode.phone)
-                            RichText(
-                              text: TextSpan(
-                                style: Theme.of(context).textTheme.bodyLarge,
-                                children: [
-                                  TextSpan(
-                                    text: mode == AuthMode.login
-                                        ? "Don't have an account? "
-                                        : 'You have an account? ',
-                                  ),
-                                  TextSpan(
-                                    text: mode == AuthMode.login
-                                        ? 'Register now'
-                                        : 'Click to login',
-                                    style: const TextStyle(color: Colors.blue),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
+                              Visibility(
+                                visible: error.isNotEmpty,
+                                child: MaterialBanner(
+                                  backgroundColor:
+                                      Theme.of(context).colorScheme.error,
+                                  content: SelectableText(error),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
                                         setState(() {
-                                          mode = mode == AuthMode.login
-                                              ? AuthMode.register
-                                              : AuthMode.login;
+                                          error = '';
                                         });
                                       },
+                                      child: const Text(
+                                        'dismiss',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    )
+                                  ],
+                                  contentTextStyle:
+                                      const TextStyle(color: Colors.white),
+                                  padding: const EdgeInsets.all(10),
+                                ),
+                              ),
+                              Column(
+                                children: [
+                                  TextFormField(
+                                    controller: emailController,
+                                    decoration: const InputDecoration(
+                                      hintText: 'Email',
+                                      border: OutlineInputBorder(),
+                                    ),
+                                    validator: (value) =>
+                                        value != null && value.isNotEmpty
+                                            ? null
+                                            : 'Required',
+                                  ),
+                                  const SizedBox(height: 20),
+                                  TextFormField(
+                                    controller: passwordController,
+                                    obscureText: true,
+                                    decoration: const InputDecoration(
+                                      hintText: 'Password',
+                                      border: OutlineInputBorder(),
+                                    ),
+                                    validator: (value) =>
+                                        value != null && value.isNotEmpty
+                                            ? null
+                                            : 'Required',
                                   ),
                                 ],
                               ),
-                            ),
-                        ],
+                              const SizedBox(height: 20),
+                              SizedBox(
+                                width: double.infinity,
+                                height: 50,
+                                child: ElevatedButton(
+                                  onPressed: isLoading
+                                      ? null
+                                      : () => _handleMultiFactorException(
+                                            _emailAndPassword,
+                                          ),
+                                  child: isLoading
+                                      ? const CircularProgressIndicator
+                                          .adaptive()
+                                      : Text(mode.label),
+                                ),
+                              ),
+                              const SizedBox(height: 20),
+                              RichText(
+                                text: TextSpan(
+                                  style: Theme.of(context).textTheme.bodyLarge,
+                                  children: [
+                                    TextSpan(
+                                      text: mode == AuthMode.login
+                                          ? 'Register'
+                                          : 'Login',
+                                      style:
+                                          const TextStyle(color: Colors.blue),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          setState(() {
+                                            mode = mode == AuthMode.login
+                                                ? AuthMode.register
+                                                : AuthMode.login;
+                                          });
+                                        },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ),
             ),
@@ -203,50 +198,9 @@ class _AuthGateState extends State<AuthGate> {
     );
   }
 
-  Future _resetPassword() async {
-    String? email;
-    await showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Send'),
-            ),
-          ],
-          content: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text('Enter your email'),
-              const SizedBox(height: 20),
-              TextFormField(
-                onChanged: (value) {
-                  email = value;
-                },
-              ),
-            ],
-          ),
-        );
-      },
-    );
-
-    if (email != null) {
-      try {
-        await _auth.sendPasswordResetEmail(email: email!);
-        ScaffoldSnackbar.of(context).show('Password reset email is sent');
-      } catch (e) {
-        ScaffoldSnackbar.of(context).show('Error resetting');
-      }
-    }
-  }
-
   Future<void> _handleMultiFactorException(
-      Future<void> Function() authFunction,
-      ) async {
+    Future<void> Function() authFunction,
+  ) async {
     setIsLoading();
     try {
       await authFunction();
@@ -258,15 +212,6 @@ class _AuthGateState extends State<AuthGate> {
       if (firstHint is! PhoneMultiFactorInfo) {
         return;
       }
-      final auth = FirebaseAuth.instance;
-      await auth.verifyPhoneNumber(
-        multiFactorSession: e.resolver.session,
-        multiFactorInfo: firstHint,
-        verificationCompleted: (_) {},
-        verificationFailed: print,
-        codeSent: (String verificationId, int? resendToken) async {},
-        codeAutoRetrievalTimeout: print,
-      );
     } on FirebaseAuthException catch (e) {
       setState(() {
         error = '${e.message}';
