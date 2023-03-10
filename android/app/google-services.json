@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "128760753191",
+    "firebase_url": "https://personal-finance-22c2a-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "personal-finance-22c2a",
+    "storage_bucket": "personal-finance-22c2a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:128760753191:android:bb063ddf3d99bad2e87202",
+        "android_client_info": {
+          "package_name": "com.example.personal_finance_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "128760753191-vvkfoelivgq6hh2b3pstvk63nb5f2om1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAC0sMaD4siqlGIvXZeKpM-bVEaKd6pS-o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "128760753191-vvkfoelivgq6hh2b3pstvk63nb5f2om1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "128760753191-cgj2sfuloqn31eeh55d8q0k01s9jp3j0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.personalfinance"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:128760753191:android:bca769b03a73ff15e87202",
+        "android_client_info": {
+          "package_name": "com.personalfinance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "128760753191-vvkfoelivgq6hh2b3pstvk63nb5f2om1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAC0sMaD4siqlGIvXZeKpM-bVEaKd6pS-o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "128760753191-vvkfoelivgq6hh2b3pstvk63nb5f2om1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "128760753191-cgj2sfuloqn31eeh55d8q0k01s9jp3j0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.personalfinance"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
